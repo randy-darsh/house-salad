@@ -6,11 +6,12 @@ describe 'User can search for representatives by state' do
 
     select 'Colorado', from: 'stateSelect'
 
-    click_on 'Locate Members of the House'
+    click_on 'Locate Members from the House'
 
     expect(current_path).to eq(search_path)
+
     url = URI.parse(current_url).to_s
-    expect(url).to include ('state=0')
+    expect(url).to include ('state=CO')
     expect(page).to have_content('7 Results')
 
     within('.representatives') do
