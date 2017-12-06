@@ -12,11 +12,13 @@ describe PropublicaService do
   context 'instance methods' do
     context '#members_by_state(state)' do
       it 'returns a collection of member info' do
-        members = subject.members_by_state("CO")
-        member = members.first
+        VCR.use_cassette("PropublicaService#members_by_state") do
+          members = subject.members_by_state("CO")
+          member = members.first
 
-        expect(members.count).to eq(7)
-        expect(member).to be_a(Hash)
+          expect(members.count).to eq(7)
+          expect(member).to be_a(Hash)
+        end
       end
     end
   end

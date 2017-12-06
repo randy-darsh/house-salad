@@ -22,11 +22,13 @@ describe Member do
   context 'class methods' do
     context ".all_by_state(state)" do
       it 'returns a list of member with a valid state' do
-        members = Member.all_by_state("CO")
-        member = members.first
+        VCR.use_cassette("Members.all_by_state") do
+          members = Member.all_by_state("CO")
+          member = members.first
 
-        expect(members.count).to eq(7)
-        expect(member).to be_a(Member)
+          expect(members.count).to eq(7)
+          expect(member).to be_a(Member)
+        end
       end
     end
   end
